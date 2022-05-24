@@ -1,17 +1,18 @@
-// đếm tổng số button
+// Đếm tổng số button
 var numOfButton = document.querySelectorAll(".drum").length;
 
 // EventListener lấy innerHTML của button được click, gọi function playsoundfile
 for (var i=0; i<numOfButton; i++) {
     document.querySelectorAll(".drum")[i].addEventListener("click", function() {
         playsoundfile(this.innerHTML);
-        this.style.color="yellow";
+        animationPlay(this.innerHTML);
     });  
 }
 
 // Lấy chữ gõ trên bàn phím
 document.addEventListener("keypress", function(e){
-    playsoundfile(e.key)
+    playsoundfile(e.key);
+    animationPlay(e.key);
 });
 
 // Function dùng switch chọn file play audio
@@ -46,5 +47,13 @@ function playsoundfile(key){
             tom4.play();            
             break;  
     }
+}
 
+//Animation hiển thị hinh nao đang bấm hoặc click
+function animationPlay(currentKey){    
+    var activeButton = document.querySelector("." + currentKey)
+    activeButton.classList.add("pressed")
+    setTimeout(function(){
+        activeButton.classList.remove("pressed")
+    } ,150)
 }
